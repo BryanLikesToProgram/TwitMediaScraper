@@ -1,37 +1,15 @@
-from selenium import webdriver
-import time
-import math
+import requests
 import os
 import platform
-from math import ceil
 
-class Webscraper:
 
-    def __init__(self, siteAddress):
-        self._siteAddress = siteAddress
-    return
-
-    #Getters & Setters
-    #siteAddress [Get, Set]
-    @property
-    def siteAddress(self):
-        return self._siteAddress
-    @siteAddress.setter
-    def setSiteAddress(self, site):
-        self._siteAddress = site
-   
-    def loadPage():
-    return
-def scrapeCSV():
-return
-def downloadJPG():
-return
-
-class Filehandle:
-    def __init__(self, userOS, userDistro, desktopDir):
+class CSVhandle:
+    def __init__(self, userOS, userDistro, downloadDir, fileName, csvCol):
         self._userOS = userOS
         self._userDistro = userDistro
-        self._siteAddress = siteAddress
+        self._downloadDir = downloadDir
+        self._fileName = fileName
+        self._csvCol = csvCol
     return
 
     #Getters & Setters
@@ -43,25 +21,46 @@ class Filehandle:
     @property
     def userDistro(self):
         return self._userDistro
-    #desktopDir [Get]
+    #downloadDir [Get]
     @property
-    def desktopDir(self):
-        return self._desktopDir
+    def downloadDir(self):
+        return self._downloadDir
+    #fileName [Get, Set]
+    @property
+    def fileName(self):
+        return self._fileName
+    @fileName.setter
+    def setFileName(self, name):
+        self._fileName = name
+    #csvCol [Get, Set]
+    @property
+    def csvColName(self):
+        return self._csvCol
+    @csvCol.setter
+    def setCSVCol(self, columns):
+        self._csvCol = columns
 
-    def createFolder(self, directory):
+    #Create a foler to store images in 
+    def createFolder(self, downloadDir):
         #credit: keithwaver github
         try:
-            if not os.path.exists(directory):
-                os.makedirs(directory)
+            if not os.path.exists(downloadDir):
+                os.makedirs(downloadDir)
                 #mkdir = single cell dir, makedirs = mutiple level 
         except OSERROR:
-                print ('Error: Creating directory. ' + directory)
+                print ('Error: Creating directory. ' + downloadDir)
         return
 
-driver = webdriver.Safari()
+    def readCSV(self, downloadDir, fileName, csvCol):
+
+
+
 ospath  = os.path.expanduser('~')
 directory =  ospath + '/Desktop/TwitMediaTest/'
+userOS = platform.system()
+userDistro = platform.version()
 
-Page  = Webscraper('https://ukjobs.uky.edu/hr/login')
-Page.loadPage()
-File = Filehandle(directory, None, None)
+csvfile = 'twitData.csv'
+columns = [0,10,20]
+    #UniqueID  
+File = CSVhandle(userOS, userDistro, directory, csvfile)
